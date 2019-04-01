@@ -30,14 +30,13 @@ routes.post('/api/register', async (req, res) => {
 
 //LOGIN ROUTE
 routes.post('/api/login', async (req, res) => {
-  const user = req.body;
   try {
-    if (user.password && user.username) {
+    if (req.body.password && req.body.username) {
       const specificUser = await db('users')
-        .where({ username: user.username })
+        .where({ username: req.body.username })
         .first();
-      const specificUserPassword = await bcrypt.compareSync(user.password, specificUser.password);
-      if (specificUser && specificUserPassword) {
+      const doPasswordsMatch = await bcrypt.compareSync(req.body.password, specificUser.password);
+      if (specificUser && doPasswordsMatch) {
         res.status(200).json(`${specificUser.username} is logged in`);
       } else {
         res.status(400).json({ message: 'Login credential does not work' });
