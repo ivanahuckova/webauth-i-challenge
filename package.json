@@ -1,0 +1,14 @@
+{
+  "name": "webauth-i-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ivanahuckova/webauth-i-challenge.git",
+  "author": "Ivana Huckova <ivana.huckova@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "knex": "^0.16.3",
+    "sqlite3": "^4.0.6"
+  }
+}
