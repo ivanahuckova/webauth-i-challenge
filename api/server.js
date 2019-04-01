@@ -1,7 +1,16 @@
 const express = require('express');
+const helmet = require('helmet');
+const cors = require('cors');
+const bcrypt = require('bcrypt');
 
-const server = express()
-server.use(express.json())
+const authRoutes = require('./routes/authRoutes');
 
-module.exports = server
+const server = express();
 
+server.use(helmet());
+server.use(express.json());
+server.use(cors());
+
+server.use('/', authRoutes);
+
+module.exports = server;
