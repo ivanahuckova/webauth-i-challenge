@@ -1,5 +1,6 @@
 const express = require('express');
 const knex = require('knex');
+const bcrypt = require('bcrypt');
 
 const knexConfig = require('../../knexfile.js').development;
 const db = knex(knexConfig);
@@ -11,9 +12,16 @@ routes.get('/', (req, res) => {
 });
 
 routes.post('/api/register', async (req, res) => {
-  const { username, password } = req.body;
+  const user = req.body;
   try {
-    const newUser = await db('users').insert;
+    if (user.password && user.username) {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      user.password = hashedPassword;
+      const newUser = await db('users').insert(user);
+      res.status(201).json(newUser);
+    } else {
+      res.status(400).json({ message: 'You need to include username and password' });
+    }
   } catch (error) {
     res.status(500).json(error.message);
   }
