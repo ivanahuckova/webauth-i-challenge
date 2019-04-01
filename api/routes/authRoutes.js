@@ -37,9 +37,9 @@ routes.post('/api/login', async (req, res) => {
         .first();
       const doPasswordsMatch = await bcrypt.compareSync(req.body.password, specificUser.password);
       if (specificUser && doPasswordsMatch) {
-        res.status(200).json(`${specificUser.username} is logged in`);
+        res.status(200).json(await db('users').select('username'));
       } else {
-        res.status(400).json({ message: 'Login credential does not work' });
+        res.status(400).json({ message: 'You shall not pass' });
       }
     } else {
       res.status(400).json({ message: 'You need to include username and password' });
