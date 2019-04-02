@@ -46,9 +46,12 @@ server.use(express.json());
 server.use(cors());
 server.use(session(sessionConfig));
 
+//Apply middleware
+server.use(Authorized.authorizedForRestricted);
+
 //Routes
 server.use('/', authRoutes);
 server.use('/api/users', userRoutes);
-server.use('/api/restricted', Authorized.isLoggedIn, restrictedRoutes);
+server.use('/api/restricted', restrictedRoutes);
 
 module.exports = server;
