@@ -4,12 +4,7 @@ const Users = require('../../data/users-model.js');
 
 const routes = express.Router();
 
-// =========== GET ROUTE =========== //
-routes.get('/', (req, res) => {
-  res.json('It is working');
-});
-
-// =========== REGISTER ROUTE =========== // With the Users model
+// =========== REGISTER ROUTE ===========
 routes.post('/api/register', async (req, res) => {
   let { password, username } = req.body;
   try {
@@ -27,7 +22,7 @@ routes.post('/api/register', async (req, res) => {
   }
 });
 
-// =========== LOGIN ROUTE =========== // With the Users model
+// =========== LOGIN ROUTE ===========
 routes.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -51,7 +46,7 @@ routes.post('/api/login', async (req, res) => {
 // =========== LOGOUT ROUTE ===========
 routes.get('/api/logout', (req, res) => {
   req.session.destroy();
-  res.end();
+  res.status(200).json({ message: "You've been logged out" });
 });
 
 module.exports = routes;

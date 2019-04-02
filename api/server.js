@@ -9,6 +9,8 @@ dotenv.config();
 
 //Routes Import
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const restrictedRoutes = require('./routes/restrictedRoutes');
 
 //DB import
 const db = require('../data/dbConfig');
@@ -40,6 +42,10 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 server.use(session(sessionConfig));
+
+//Routes
 server.use('/', authRoutes);
+server.use('/api/users', userRoutes);
+server.use('/api/restricted', restrictedRoutes);
 
 module.exports = server;

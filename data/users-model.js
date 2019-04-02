@@ -11,7 +11,12 @@ function findByUsername(username) {
     .first();
 }
 
+function findAll() {
+  return db('users').select('username', 'id', 'password');
+}
+
 module.exports = {
   add,
-  findByUsername
+  findByUsername,
+  findAll
 };
