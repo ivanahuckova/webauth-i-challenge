@@ -15,6 +15,9 @@ const restrictedRoutes = require('./routes/restrictedRoutes');
 //DB import
 const db = require('../data/dbConfig');
 
+//Middleware import
+const Authorized = require('./middleware/auth-middleware');
+
 //Server
 const server = express();
 
@@ -46,6 +49,6 @@ server.use(session(sessionConfig));
 //Routes
 server.use('/', authRoutes);
 server.use('/api/users', userRoutes);
-server.use('/api/restricted', restrictedRoutes);
+server.use('/api/restricted', Authorized.isLoggedIn, restrictedRoutes);
 
 module.exports = server;

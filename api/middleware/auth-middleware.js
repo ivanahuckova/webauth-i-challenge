@@ -1,4 +1,4 @@
-function isAuthorized(req, res, next) {
+function isLoggedIn(req, res, next) {
   if (req.session && req.session.user) {
     next();
   } else {
@@ -6,4 +6,6 @@ function isAuthorized(req, res, next) {
   }
 }
 
-module.exports = isAuthorized;
+module.exports = {
+  isLoggedIn
+};

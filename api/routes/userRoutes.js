@@ -1,11 +1,11 @@
 const express = require('express');
 const Users = require('../../data/users-model.js');
-const isAuthorized = require('../middleware/auth-middleware.js');
+const Authorized = require('../middleware/auth-middleware.js');
 
 const routes = express.Router();
 
 // =========== SHOW ALL USERS IF LOGGED IN ROUTE ===========
-routes.get('/', isAuthorized, async (req, res) => {
+routes.get('/', Authorized.isLoggedIn, async (req, res) => {
   try {
     const allUsers = await Users.findAll();
     res.status(200).json(allUsers);

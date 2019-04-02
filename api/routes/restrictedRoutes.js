@@ -1,10 +1,7 @@
 const express = require('express');
 // const Users = require('../../data/users-model.js');
-const isAuthorized = require('../middleware/auth-middleware.js');
 
 const routes = express.Router();
-
-routes.use(isAuthorized);
 
 // =========== GET ROUTES =========== //
 routes.get('/', (req, res) => {
